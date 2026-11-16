@@ -28,7 +28,7 @@ def test_list_type():
     # indexed and sliced:
     assert squares[0] == 1  # indexing returns the item
     assert squares[-1] == 25
-    assert squares[-3:] == [9, 16, 25]  # slicing returns a new list
+    assert squares[-4:] == [4, 9, 16, 25]  # slicing returns a new list
 
     # All slice operations return a new list containing the requested elements.
     # This means that the following slice returns a new (shallow) copy of
