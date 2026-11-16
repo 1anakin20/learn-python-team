@@ -28,7 +28,7 @@ def test_list_type():
     # indexed and sliced:
     assert squares[0] == 1  # indexing returns the item
     assert squares[-1] == 25
-    assert squares[-3:] == [9, 16, 25]  # returns a new list, negative indexes count from the end
+    assert squares[-3:] == [9, 16, 25, 100, 200]  # returns a new list, negative indexes count from the end
     assert squares[1:4] == [4, 9, 16]  # start is included, stop is not
 
     # All slice operations return a new list containing the requested elements.
