@@ -336,3 +336,39 @@ def test_nested_list_comprehensions():
         (3, 7, 11),
         (4, 8, 12),
     ]
+
+
+def test_sorted_builtin():
+    """The sorted() built-in function.
+
+    sorted() builds a new sorted list from any iterable, without touching the
+    original one. Handy when you want to keep the list in its original order
+    and still get a sorted version of it.
+    """
+
+    prices = [2.5, 1.0, 3.75, 0.5, 2.0]
+
+    # sorted() returns a new list, the original stays untouched.
+    cheapest_first = sorted(prices)
+    assert cheapest_first == [0.5, 1.0, 2.0, 2.5, 3.75]
+    assert prices == [2.5, 1.0, 3.75, 0.5, 2.0]
+
+    # reverse=True gives the descending order.
+    priciest_first = sorted(prices, reverse=True)
+    assert priciest_first == [3.75, 2.5, 2.0, 1.0, 0.5]
+
+    # key= tells sorted() what to compare, here the length of each word.
+    words = ['banana', 'kiwi', 'apple', 'fig']
+    by_length = sorted(words, key=len)
+    assert by_length == ['fig', 'kiwi', 'apple', 'banana']
+
+    # Sorting numbers stored as strings gives a surprising result, since '10'
+    # comes before '2' when compared as text. Using key=int fixes it.
+    number_labels = ['10', '9', '2', '33']
+    assert sorted(number_labels) == ['10', '2', '33', '9']
+    assert sorted(number_labels, key=int) == ['2', '9', '10', '33']
+
+    # Unlike sorted(), list.sort() changes the list in place and returns None.
+    sort_result = prices.sort()
+    assert sort_result is None
+    assert prices == [0.5, 1.0, 2.0, 2.5, 3.75]
