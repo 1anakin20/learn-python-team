@@ -26,3 +26,29 @@ def test_if_statement():
         conclusion = 'Number bigger than or equal to one'
 
     assert conclusion == 'Number bigger than or equal to one'
+
+    print(conclusion)
+
+
+def test_nested_conditions():
+    """Nested if statements check multiple conditions in sequence."""
+
+    is_weekend = True
+    is_raining = True
+    plan = ''
+
+    if is_weekend:
+        if is_raining:
+            plan = 'Stay indoors'
+        else:
+            plan = 'Go hiking'
+    else:
+        plan = 'Go to work'
+
+    assert plan == 'Stay indoors'
+
+    print(plan)
+
+
+test_if_statement()
+test_nested_conditions()
