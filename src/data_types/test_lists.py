@@ -372,3 +372,73 @@ def test_sorted_builtin():
     sort_result = prices.sort()
     assert sort_result is None
     assert prices == [0.5, 1.0, 2.0, 2.5, 3.75]
+
+
+def test_slicing_with_step():
+    """Slicing with a step.
+
+    The full slice notation is list[start:stop:step]. Most examples only use
+    start and stop, but the step is useful to skip elements or even to walk
+    the list backwards.
+    """
+
+    numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+    # Every second element.
+    evens = numbers[::2]
+    assert evens == [0, 2, 4, 6, 8]
+
+    # Start at index 1 and take every second one, so all the odds.
+    odds = numbers[1::2]
+    assert odds == [1, 3, 5, 7, 9]
+
+    # A slice in the middle of the list with a step.
+    some = numbers[2:8:2]
+    assert some == [2, 4, 6]
+
+    # A negative step walks the list backwards, a common trick to reverse a
+    # copy of a list.
+    backwards = numbers[::-1]
+    assert backwards == [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+    assert numbers == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]  # the original is not changed
+
+    # Negative indexes count from the end, so this grabs the last three items.
+    last_three = numbers[-3:]
+    assert last_three == [7, 8, 9]
+
+    # And this takes those same items in reverse order.
+    last_three_reversed = numbers[:6:-1]
+    assert last_three_reversed == [9, 8, 7]
+
+
+def test_comprehension_with_condition():
+    """Comprehensions with a condition.
+
+    A plain if at the end of a comprehension filters elements out, but a
+    conditional expression can also change the value that gets kept.
+    """
+
+    numbers = range(10)
+
+    # Keep only the even numbers (filtering).
+    evens = [x for x in numbers if x % 2 == 0]
+    assert evens == [0, 2, 4, 6, 8]
+
+    # Nothing is filtered here, the label depends on the condition.
+    labels = ['even' if x % 2 == 0 else 'odd' for x in numbers]
+    assert labels == [
+        'even',
+        'odd',
+        'even',
+        'odd',
+        'even',
+        'odd',
+        'even',
+        'odd',
+        'even',
+        'odd',
+    ]
+
+    # Combining both: keep the multiples of 3 and square them.
+    squared_multiples_of_three = [x ** 2 for x in numbers if x % 3 == 0]
+    assert squared_multiples_of_three == [0, 9, 36, 81]
