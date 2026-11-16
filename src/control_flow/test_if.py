@@ -50,5 +50,27 @@ def test_nested_conditions():
     print(plan)
 
 
+
+def test_multiple_elif_branches():
+    """Multiple elif branches can handle several ordered outcomes."""
+
+    score = 82
+    grade = ''
+
+    if score >= 90:
+        grade = 'A'
+    elif score >= 80:
+        grade = 'B'
+    elif score >= 70:
+        grade = 'C'
+    else:
+        grade = 'F'
+
+    assert grade == 'B'
+
+    print(grade)
+
+
 test_if_statement()
 test_nested_conditions()
+test_multiple_elif_branches()
