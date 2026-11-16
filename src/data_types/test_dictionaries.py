@@ -77,3 +77,14 @@ def test_dictionary():
     assert dictionary_for_string_keys['sape'] == 4139
     assert dictionary_for_string_keys['guido'] == 4127
     assert dictionary_for_string_keys['jack'] == 4098
+
+    # test list of tuples
+    assert list(fruits_dictionary.items())[0] == [
+        ('cherry', 'red'),
+        ('apple', 'green'),
+        ('banana', 'yellow'),
+    ][0]
+
+    # test Deleting element
+    del fruits_dictionary['banana']
+    assert 'banana' not in fruits_dictionary
