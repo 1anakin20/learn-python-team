@@ -1,5 +1,7 @@
 # Playground and Cheatsheet for Learning Python
 
+## Part A update
+
 [![Build Status](https://travis-ci.org/trekhleb/learn-python.svg?branch=master)](https://travis-ci.org/trekhleb/learn-python)
 
 > This is a collection of Python scripts that are split by [topics](#table-of-contents) and contain 
