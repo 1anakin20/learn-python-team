@@ -336,3 +336,109 @@ def test_nested_list_comprehensions():
         (3, 7, 11),
         (4, 8, 12),
     ]
+
+
+def test_sorted_builtin():
+    """The sorted() built-in function.
+
+    sorted() builds a new sorted list from any iterable, without touching the
+    original one. Handy when you want to keep the list in its original order
+    and still get a sorted version of it.
+    """
+
+    prices = [2.5, 1.0, 3.75, 0.5, 2.0]
+
+    # sorted() returns a new list, the original stays untouched.
+    cheapest_first = sorted(prices)
+    assert cheapest_first == [0.5, 1.0, 2.0, 2.5, 3.75]
+    assert prices == [2.5, 1.0, 3.75, 0.5, 2.0]
+
+    # reverse=True gives the descending order.
+    priciest_first = sorted(prices, reverse=True)
+    assert priciest_first == [3.75, 2.5, 2.0, 1.0, 0.5]
+
+    # key= tells sorted() what to compare, here the length of each word.
+    words = ['banana', 'kiwi', 'apple', 'fig']
+    by_length = sorted(words, key=len)
+    assert by_length == ['fig', 'kiwi', 'apple', 'banana']
+
+    # Sorting numbers stored as strings gives a surprising result, since '10'
+    # comes before '2' when compared as text. Using key=int fixes it.
+    number_labels = ['10', '9', '2', '33']
+    assert sorted(number_labels) == ['10', '2', '33', '9']
+    assert sorted(number_labels, key=int) == ['2', '9', '10', '33']
+
+    # Unlike sorted(), list.sort() changes the list in place and returns None.
+    sort_result = prices.sort()
+    assert sort_result is None
+    assert prices == [0.5, 1.0, 2.0, 2.5, 3.75]
+
+
+def test_slicing_with_step():
+    """Slicing with a step.
+
+    The full slice notation is list[start:stop:step]. Most examples only use
+    start and stop, but the step is useful to skip elements or even to walk
+    the list backwards.
+    """
+
+    numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+    # Every second element.
+    evens = numbers[::2]
+    assert evens == [0, 2, 4, 6, 8]
+
+    # Start at index 1 and take every second one, so all the odds.
+    odds = numbers[1::2]
+    assert odds == [1, 3, 5, 7, 9]
+
+    # A slice in the middle of the list with a step.
+    some = numbers[2:8:2]
+    assert some == [2, 4, 6]
+
+    # A negative step walks the list backwards, a common trick to reverse a
+    # copy of a list.
+    backwards = numbers[::-1]
+    assert backwards == [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+    assert numbers == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]  # the original is not changed
+
+    # Negative indexes count from the end, so this grabs the last three items.
+    last_three = numbers[-3:]
+    assert last_three == [7, 8, 9]
+
+    # And this takes those same items in reverse order.
+    last_three_reversed = numbers[:6:-1]
+    assert last_three_reversed == [9, 8, 7]
+
+
+def test_comprehension_with_condition():
+    """Comprehensions with a condition.
+
+    A plain if at the end of a comprehension filters elements out, but a
+    conditional expression can also change the value that gets kept.
+    """
+
+    numbers = range(10)
+
+    # Keep only the even numbers (filtering).
+    evens = [x for x in numbers if x % 2 == 0]
+    assert evens == [0, 2, 4, 6, 8]
+
+    # Nothing is filtered here, the label depends on the condition.
+    labels = ['even' if x % 2 == 0 else 'odd' for x in numbers]
+    assert labels == [
+        'even',
+        'odd',
+        'even',
+        'odd',
+        'even',
+        'odd',
+        'even',
+        'odd',
+        'even',
+        'odd',
+    ]
+
+    # Combining both: keep the multiples of 3 and square them.
+    squared_multiples_of_three = [x ** 2 for x in numbers if x % 3 == 0]
+    assert squared_multiples_of_three == [0, 9, 36, 81]
