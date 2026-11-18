@@ -72,11 +72,11 @@ def test_multiple_elif_branches():
     score = 82
     grade = ''
 
-    if score >= 90:
+    if score >= 95:
         grade = 'A'
-    elif score >= 80:
+    elif score >= 85:
         grade = 'B'
-    elif score >= 70:
+    elif score >= 75:
         grade = 'C'
     else:
         grade = 'F'
