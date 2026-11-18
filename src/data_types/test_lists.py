@@ -20,23 +20,26 @@ def test_list_type():
     # Lists are very similar to arrays. They can contain any type of variable, and they can contain
     # as many variables as you wish. Lists can also be iterated over in a very simple manner.
     # Here is an example of how to build a list.
-    squares = [1, 4, 9, 16, 25]
+    squares = [1, 4, 9, 16, 25, 100, 200]
 
     assert isinstance(squares, list)
 
     # Like strings (and all other built-in sequence type), lists can be
     # indexed and sliced:
     assert squares[0] == 1  # indexing returns the item
-    assert squares[-1] == 25
-    assert squares[-4:] == [4, 9, 16, 25]  # slicing returns a new list
+    assert squares[-1] == 200
+
+    assert squares[-3:] == [25, 100, 200]  # returns a new list, negative indexes count from the end
+    assert squares[-4:] == [16, 25, 100, 200]
+    assert squares[1:4] == [4, 9, 16]  # start is included, stop is not
 
     # All slice operations return a new list containing the requested elements.
     # This means that the following slice returns a new (shallow) copy of
     # the list:
-    assert squares[:] == [1, 4, 9, 16, 25]
+    assert squares[:] == [1, 4, 9, 16, 25, 100, 200]
 
     # Lists also support operations like concatenation:
-    assert squares + [36, 49, 64, 81, 100] == [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+    assert squares + [36, 49, 64, 81, 100] == [1, 4, 9, 16, 25, 100, 200, 36, 49, 64, 81, 100]
 
     # Unlike strings, which are immutable, lists are a mutable type, i.e. it
     # is possible to change their content:
