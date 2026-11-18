@@ -121,3 +121,30 @@ def test_function_definition():
     greet_with_closure = compose_greet_func_with_closure('John')
 
     assert greet_with_closure() == 'Hello there, John!'
+
+
+def addition_function_example(a, b):
+    """Return the sum of a and b."""
+    #this function takes two arguments a and b, which should be an int or a float
+
+    #checking if the arguments are numbers, if not raise a TypeError
+    if not isinstance(a, (int, float)) or not isinstance(b, (int, float)):
+        #gives error if the arguments are not numbers
+        raise TypeError("Both arguments must be numbers.")
+    #if the arguments are numbers, return their sum
+    return a + b
+
+def print_list():
+    """Prints a list of numbers from 1 to 10."""
+    #this function takes no arguments and prints a list of numbers from 1 to 10
+    #this type of function can be useful to print things multiple times throughout the program
+
+    #creating a list of numbers from 1 to 10
+    numbers = list(range(1, 11))
+    #printing the list of numbers
+    print(numbers)
+
+print(addition_function_example(5, 10))  # returns 15
+print_list()  # prints [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+#uncomment the following line to see the TypeError raised when passing a string as an argument
+#print(addition_function_example(5, '10'))  # raises TypeError: Both arguments must be numbers.
